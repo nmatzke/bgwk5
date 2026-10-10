@@ -1,0 +1,13 @@
+Install a customized version of castor for biogeographical SSE simulations
+
+
+# Dependencies:
+install.packages(c("naturalsort", "RSpectra"))
+
+# In Terminal (not R)
+R CMD install ~/GitHub/PhyBEARS.jl/simulator/castor_1.7.2.000004.tar.gz
+
+# This will require that you have a C++ compiler installed, e.g.
+# gcc / clang etc. (gcc = gnu c compiler)
+# Mac comes with something adequate, not sure about other systems
+#

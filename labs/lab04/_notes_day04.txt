@@ -1,0 +1,139 @@
+
+
+
+Hi, could you please explain briefly what are the implications of having multiple individuals per species in the phylogeny, e.g, when you have some widespread species ocurring in different areas and you want to include one individual per area?
+
+A: 
+
+* DEC, DEC+J, etc. assume that it is reasonable for species to occupy 1 or more areas
+
+(the d = range expansion, e=range loss processes assume this)
+
+* So, *if* your clade has species that all only occupy a single area, then using a tree of specimens, with 1 specimen per species, is fine
+
+* But, if your clade has some species that occupy multiple ranges, a tree of specimens will be very misleading, because each specimen lives in a single area.
+
+Single-area ranges strongly favour +J model variants.
+(fine if truly 1 area, but not otherwise)
+
+Solution: simplify the tree to 1 specimen per species
+
+Trees can pruned with e.g.:
+
+ape::drop.tip
+
+
+
+
+
+My study system involves the Sub-Antarctic islands, which include both very old Gondwanan fragments and much younger small volcanic islands (Fig. 1 here: https://onlinelibrary.wiley.com/doi/10.1111/jse.13170). I’m thinking about using GPlates to reconstruct paleocoordinates and build time-stratified dispersal matrices.  However I don´t know how reliable these reconstructions are for such a dynamic and tectonically complex island systems (I can imagine it works better for main plates?). Do you think that GPlates-based paleomotion could improve biogeographic inference in cases like this, or is a static connectivity matrix generally more defensible given the uncertainty in paleopositions of small islands?
+
+Complex question: thoughts
+
+- continental blocks probably are reasonably well modeled, as long as they are in GPlates
+
+- Gplates has many different published reconstructions (plate models), so you can try several
+
+- plus, as we'll see today, many different ways of measuring distance are correlated
+
+- An exception could be: connectivity/land bridges - this is probably the hardest one
+
+"When is something connected" is different than the general position of the tectonic plates
+
+Fossil evidence: eg the Great American Interchange - dispersals ~2.5 Ma when Panama connected
+
+General advice on distances, connectivity, dispersal multiplers: *everything* is a hypothesis, any hypotheses could be compared in a model-comparison framework
+
+H1: closest distances, as measured in Gplates
+H2: centroid distances, as measured in Gplates
+H3: dispersal multipler 1.0^w when closest distance < 100 km
+dispersal multipler 0.1^w when closest distance > 100 km
+
+
+
+
+
+
+
+
+
+Q: I still have a question about whether the analysis should include outgroups. If I'm focusing on the original place of a family, i.e, the reconstructed results of the root nodes, should the Newick tree I use include outgroups of that family?
+
+A: Generally, yes include outgroups if possible.  Typically, the best answers for estimating the state/range at node F (the root node of a Family) would include multiple sister groups of clade F.  This way, node F is in the middle of the tree, not the bottom.  It gets information from both the clade F species, and the sister groups.
+
+Also: bigger trees just contain more data, thus more information to estimate the processes operating. Presumably, more accurate inference of rates/processes leads to more accurate ancestral range estimates. 
+
+(The big assumption is homogeneity of the process, ie it's working about the same across the tree. That could be wrong, but then that's true of almost anything in macroevolution.)
+
+
+Q: Does the distribution range of the tips within the family or the distribution range of outgroup have a greater impact on the root node? 
+
+A: generally, the tips within the family have a greater impact. Typically, ranges are somewhat conserved, so typically much of what is in the tips was inherited from their common ancestor. 
+
+Big counterexample: situations like marsupisals - South American -> Antarctica -> Australia
+
+If you were doing an Australia clade analysis, it would be hard to infer Antarctica origins without e.g. fossil outgroups, and a connectivity matrix allowing that area to be occupied in the past, if not now. 
+
+Trees of living species can be biased, if extinction was biased e.g. geographically
+
+
+
+
+
+
+
+Q: If I haven't sampled outgroups (I did not obtain DNA data from the outgroup), can I manually add outgroups to the Newick tree, using divergence times inferred from other literature for branch lengths? Thank you. 
+
+A: Basically yes. You just have to justify what you do. Especially: check that the dating approximately matches.
+
+Nick "data mashing" trees from different source. Examples:
+
+"divide and conquer" analyses in StarBEAST - Ashman et al. 2017
+- mini BEAST analyses of each subclade, then pasted into a BEAST "skeleton tree" with representative clade members
+
+
+* Getting a published tree figure into a Newick file, when the supplemental data etc. does not give you the Newick file
+- You can digitize trees with e.g. the "TreeRogue" R code (google it).
+- Digitize nodes, tips & corners by hand (various programs let you click on a graphic to mark points & extract coordinates)
+- R script converts points to a Newick file, with some checks
+- R packages with supertrees
+
+Useful APE functions:
+drop.tip
+extract.clade
+function to paste a clade in: bind.tree
+
+Functions like prt(tr) are useful to determine e.g. the age of the nodes, the branch lengths, etc. 
+
+
+
+
+
+Q: Biogeography on reticulated networks??
+
+A: Imaginable, but much different models that we've been considering
+
+You would need to come up with:
+- models for lineage fusion in biogeography (opposite of cladogenesis)
+- polyploids, hybrids -- many of these produce a new species, but leave the previous species existing 
+program: matrices to hold these
+- software to calculate likelihoods on a phylogenetic network
+- Nick's view: get a grant and a couple of years to do it
+
+
+
+New features?  I can't promise a timeframe, but it's useful to hear what new features are desired.
+
+- BSMs with ClaSSE models
+- trait-dependence in PhyBEARS
+- documentation
+
+- I would love to have biogeographical SSE models with priority effects & density-dependent diversification
+-- The idea is: diversfication rate slows down as the ecosystem "fills up"
+-- Also, it is harder to successfully disperse into and colonise a region that is occupied
+
+These seem obvious from biology, but are hard to calculate likelihoods for, but may be possible, especially with Julia's ability to interpolate.  E.g. perhaps we can assume several different density dependence regimes, then interpolate between them to get total likelihood.
+
+
+
+
