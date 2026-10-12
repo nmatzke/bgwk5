@@ -26,7 +26,7 @@ install.packages("GenSA")
 
 # Install additional dependencies
 #install.packages(c("plotrix","gdata","minqa","fdrtool","statmod","SparseM","spam"),"MultinomialCI"))
-install.packages(c("plotrix","gdata","minqa","fdrtool","statmod","SparseM","spam")
+install.packages(c("plotrix","gdata","minqa","fdrtool","statmod","SparseM","spam"))
 
 # MultinomialCI is currently off of CRAN. It is just "suggested" for BioGeoBEARS. 
 # But if you need it, download the tar.gz file from e.g.:
@@ -39,7 +39,7 @@ install.packages(pkgs="~/Downloads/MultinomialCI_1.2.tar.gz", repos=NULL, type="
 
 # Option #1 (easiest): pak (replacing install_github)
 library(pak)
-pak::pkg_install(pkg="nmatzke/BioGeoBEARS", lib=NULL, upgrade=FALSE, ask=FALSE, dependencies=FALSE
+pak::pkg_install(pkg="nmatzke/BioGeoBEARS", lib=NULL, upgrade=FALSE, ask=FALSE, dependencies=FALSE)
 
 ################################################
 # Large numbers of students (eg a university class)
