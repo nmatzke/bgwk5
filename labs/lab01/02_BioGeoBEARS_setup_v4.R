@@ -11,7 +11,7 @@
 # (but WITHOUT the '' marks ONCE.
 run_text_inside_quote_once = '
 install.packages("ape")
-install.packages("devtools")
+install.packages("pak") # replacement for devtools
 install.packages("Rcpp")
 install.packages("FD")
 install.packages("snow")
@@ -25,28 +25,33 @@ install.packages("optimx")
 install.packages("GenSA")
 
 # Install additional dependencies
-install.packages(c("plotrix","gdata","minqa","fdrtool","statmod","SparseM","spam","MultinomialCI"))
+#install.packages(c("plotrix","gdata","minqa","fdrtool","statmod","SparseM","spam"),"MultinomialCI"))
+install.packages(c("plotrix","gdata","minqa","fdrtool","statmod","SparseM","spam")
 
-################################################
-# Small numbers of students:
-# Install BioGeoBEARS from GitHub
-################################################
-# (BioGeoBEARS is pure R, so installation is easy *if* the above 
-#  packages have been installed)
-library(devtools)
-install_github(repo="nmatzke/BioGeoBEARS", dependencies=TRUE, upgrade="never")
+# MultinomialCI is currently off of CRAN. It is just "suggested" for BioGeoBEARS. 
+# But if you need it, download the tar.gz file from e.g.:
+# https://github.com/nmatzke/Matzke_R_binaries/tree/master/Multinomial_CI
+# https://cran.r-project.org/src/contrib/Archive/MultinomialCI/
+install.packages(pkgs="~/Downloads/MultinomialCI_1.2.tar.gz", repos=NULL, type="source", dependencies=TRUE)
+
+
+# Installing BioGeoBEARS - options:
+
+# Option #1 (easiest): pak (replacing install_github)
+library(pak)
+pak::pkg_install(pkg="nmatzke/BioGeoBEARS", lib=NULL, upgrade=FALSE, ask=FALSE, dependencies=FALSE
 
 ################################################
 # Large numbers of students (eg a university class)
 # To avoid GitHub overload, download BioGeoBEARS from Canvas, then install locally:
 ################################################
 # Download from:
-# Canvas -> BIOSCI 395 -> Files -> Southern_Conifer_Biogeog
+# Canvas -> BIOSCI 39d5 -> Files -> Southern_Conifer_Biogeog
 # https://canvas.auckland.ac.nz/courses/106014/files/folder/Southern_conifer_biogeog
-# BioGeoBEARS_1.1.3.tar.gz
+# BioGeoBEARS_1.1.4.tar.gz
 
 # Install BioGeoBEARS from Canvas-downloaded zipfile
-install.packages("BioGeoBEARS_1.1.3.tar.gz", repos=NULL, type="source", dependencies=TRUE)
+install.packages("BioGeoBEARS_1.1.4.tar.gz", repos=NULL, type="source", dependencies=TRUE)
 
 ' # END run_text_inside_quote_once
 

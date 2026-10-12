@@ -3,18 +3,7 @@
 # SETUP -- libraries/BioGeoBEARS updates
 #######################################################
 # Load the package (after installation, see above).
-library(FD)       # for FD::maxent() (make sure this is up-to-date)
-library(snow)     # (if you want to use multicore functionality; some systems/R versions prefer library(parallel), try either)
-library(parallel)
-
-#######################################################
-# If not already installed, install BioGeoBEARS from devtools
-# - only needs to be done once
-# (University computers may need to repeat installation
-#  after each login)
-library(devtools)
-#devtools::install_github(repo="nmatzke/BioGeoBEARS", upgrade="never")
-#######################################################
+library(ape)
 library(rexpokit)
 library(cladoRcpp)
 library(BioGeoBEARS)
@@ -39,6 +28,7 @@ library(BioGeoBEARS)
 # wd = "Psychotria_M0_equalRates/"
 wd = "/Users/nickm/ts/labs/lab01/"
 wd = "/Users/nickm/Downloads/lab01/"
+wd = "~/GitHub/bgwk5/labs/lab01/"
 setwd(wd)
 
 # Double-check your working directory with getwd()
@@ -1017,3 +1007,24 @@ resBAYAREALIKEj$output@params_table[c("d","e","j","x"),"est"]
 # For each model, add the results into a 
 # results table. In the end, you will 
 # calculate AICs and AIC weights for all models.
+
+
+#######################################################
+# Seeing ancestral state probabilities
+#######################################################
+
+res = resDECj
+sepval = ""
+ranges_list = get_ranges_list_from_BGB_results_object(res, sepval=sepval)
+res2 = annotate_BGB_results(res, sepval=sepval)
+head(res2$ML_marginal_prob_each_state_at_branch_top_AT_node)
+rootnode = ceiling(nrow(res2$ML_marginal_prob_each_state_at_branch_top_AT_node) / 2)
+res2$ML_marginal_prob_each_state_at_branch_top_AT_node[(rootnode-3):(rootnode+3),]
+
+ancstates_df = cft_ancstates_res(res=res2)
+ancstates_df
+
+ancstates_df[(rootnode-3):(rootnode+3),]
+
+
+

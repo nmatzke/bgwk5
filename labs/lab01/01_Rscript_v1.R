@@ -337,6 +337,7 @@ wd = "/Users/nickm/Desktop/Rintro/"
 wd = "~/Desktop/Rintro/"
 wd="/drives/GDrive/REU_example"
 wd = "~/ts/labs/lab01/"
+wd = "~/GitHub/bgwk5/labs/lab01/"
 
 # On an older PC, you might have to specify paths like this:
 #wd = "c:\\Users\\nick\\Desktop\\_ib200a\\ib200b_sp2011\\lab03"
@@ -414,9 +415,6 @@ apply(X=grade_data[ , 2:4], MARGIN=2, FUN=mean)
 # Why doesn't this work?
 mean(grade_data)
 # What caused the warning message in mean(grade_data)?
-
-# How about this?
-colMeans(grade_data[,2:4])
 
 # How about this?
 colMeans(grade_data[,2:4])
@@ -579,7 +577,7 @@ hist(heights$Height)
 # automated scaling of the x-axis.
 
 # Let's fix the x-axis to be (5 feet, 7 feet)
-xlims = c(5*12, 7*12)
+xlims = c(4*12, 7*12)
 hist(heights$Midparent, xlim=xlims)
 hist(heights$Height, xlim=xlims)
 
@@ -746,7 +744,6 @@ anova(lm_result)
 
 # You can get some standard diagnostic regression plots with:
 plot(lm_result)
-
 # YOU HAVE TO HIT RETURN SEVERAL TIMES BEFORE CONTINUING
 
 # Let's plot the regression line on top of the points
