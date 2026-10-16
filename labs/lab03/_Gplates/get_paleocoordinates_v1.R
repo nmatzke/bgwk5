@@ -1,13 +1,16 @@
 #install.packages("openxlsx")
 #install.packages("rgplates")
 #install.packages("geojsonsf")
+#install.packages("tidyverse")
+
 library(openxlsx)
 library(rgplates)
 library(geojsonsf)
 library(tidyverse)
 
 #set working directory
-wd = "~/ts/labs/lab03/_Gplates/"
+#wd = "~/ts/labs/lab03/_Gplates/"
+wd = "~/GitHub/bgwk5/labs/lab03/_Gplates/"
 setwd(wd)
 
 fn = "12_regions_points.xlsx"

@@ -134,7 +134,8 @@ library(BioGeoBEARS)
 # Set your working directory for output files
 # default here is your home directory ("~")
 # Change this as you like
-wd = "~/ts/labs/lab03"
+#wd = "~/ts/labs/lab03"
+wd="~/GitHub/bgwk5/labs/lab03/"
 setwd(wd)
 
 # Double-check your working directory with getwd()
