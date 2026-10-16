@@ -51,7 +51,7 @@ install.packages(pkgs="~/Downloads/MultinomialCI_1.2.tar.gz", repos=NULL, type="
 
 # Option #1 (easiest): pak (replacing install_github)
 library(pak)
-pak::pkg_install(pkg="nmatzke/BioGeoBEARS", lib=NULL, upgrade=FALSE, ask=FALSE, dependencies=NA)
+pak::pkg_install(pkg="nmatzke/BioGeoBEARS", lib=NULL, upgrade=FALSE, ask=FALSE, dependencies=FALSE)
 
 # Option #2 (2nd simplest): remotes (which simplified from devtools::install_github, which is being deprecated)
 # (BioGeoBEARS is pure R, so installation is easy *if* the above 
