@@ -22,18 +22,19 @@ using PhyBEARS.Uppass
 
 """
 # Run with:
-cd(expanduser("~/GitHub/PhyBEARS.jl/ex/cicadidae4/phybears_DECj+BD_M0_mr3/"))
-include(expanduser("~/GitHub/PhyBEARS.jl/ex/cicadidae4/phybears_DECj+BD_M0_mr3/phybears_M0_mr3_DEC+J_BD_v2.jl"))
+cd(expanduser("~/GitHub/bgwk5/labs/lab04/cicadidae4/phybears_DECj+BD_M0_mr3/"))
+include(expanduser("~/GitHub/bgwk5/labs/lab04/cicadidae4/phybears_DECj+BD_M0_mr3/phybears_M0_mr3_DEC+J_BD_v2.jl"))
 """
 
-setwd(expanduser("~/GitHub/PhyBEARS.jl/ex/cicadidae4/phybears_DECj+BD_M0_mr3/"))
+#setwd(expanduser("~/GitHub/bgwk5/labs/lab04/cicadidae4/phybears_DECj+BD_M0_mr3/"))
+setwd(expanduser("~/GitHub/bgwk5/labs/lab04/cicadidae4/phybears_DECj+BD_M0_mr3/"))
 
 # Input geography
-lgdata_fn = expanduser("~/GitHub/PhyBEARS.jl/ex/cicadidae4/phybears_DECj+BD_M0_mr3/geog.data")
+lgdata_fn = expanduser("~/GitHub/bgwk5/labs/lab04/cicadidae4/phybears_DECj+BD_M0_mr3/geog.data")
 geog_df = Parsers.getranges_from_LagrangePHYLIP(lgdata_fn)
 
 # Input tree
-trfn = expanduser("~/GitHub/PhyBEARS.jl/ex/cicadidae4/phybears_DECj+BD_M0_mr3/tree.newick")
+trfn = expanduser("~/GitHub/bgwk5/labs/lab04/cicadidae4/phybears_DECj+BD_M0_mr3/tree.newick")
 tr = readTopology(trfn)
 trdf = prt(tr)
 
@@ -94,7 +95,10 @@ oldest_possible_age = 150;
 Es_tspan = (0, oldest_possible_age)
 interpolators = files_to_interpolators(files, setup.numareas, setup.states_list, setup.v_rows, p.p_indices.Carray_jvals, p.p_indices.Carray_kvals, trdf; oldest_possible_age=oldest_possible_age);
 
-interpolators.area_of_areas_interpolator
+interpolators.distances_interpolator(0.0)
+interpolators.distances_interpolator(1.0)
+interpolators.distances_interpolator(2.0)
+interpolators.distances_interpolator(12.0)
 
 p_Es_v12 = (n=p_Es_v5.n, params=p_Es_v5.params, p_indices=p_Es_v5.p_indices, p_TFs=p_Es_v5.p_TFs, uE=p_Es_v5.uE, terms=p_Es_v5.terms, setup=inputs.setup, states_as_areas_lists=inputs.setup.states_list, use_distances=true, bmo=bmo, interpolators=interpolators);
 
@@ -206,7 +210,7 @@ library(ape)
 library(cladoRcpp)
 library(diversitree)
 library(BioGeoBEARS)
-wd = "~/GitHub/PhyBEARS.jl/ex/cicadidae4/phybears_DECj+BD_M0_mr3/"  # CHANGE THIS
+wd = "~/GitHub/bgwk5/labs/lab04/cicadidae4/phybears_DECj+BD_M0_mr3/"  # CHANGE THIS
 setwd(wd)
 sourceall("~/GitHub/PhyBEARS.jl/Rsrc/")
 res = PhyBEARS_res_to_BGB_res(outfns=NaN)

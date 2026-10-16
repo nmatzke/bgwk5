@@ -198,18 +198,18 @@ p = p_Ds_v12 = (n=p_Es_v12.n, params=p_Es_v12.params, p_indices=p_Es_v12.p_indic
 #######################################################
 
 # (updates the "res" results object)
-uppass_ancstates_v12!(res, trdf, p_Ds_v12, solver_options; use_Cijk_rates_t=false)
+PhyBEARS.Uppass.uppass_ancstates_v12!(res, trdf, p_Ds_v12, solver_options; use_Cijk_rates_t=false)
 
 # Output the updated res to a series of .Rdata objects that can be read in R
 #######################################################
 # Ancestral states estimation and plotting
 #######################################################
-resDECj_Yule = deepcopy(inputs.res);
+tmpres = deepcopy(inputs.res);
 geogfn = lgdata_fn
 lnLs_tuple = (total_calctime_in_sec, iteration_number, Julia_sum_lq, rootstates_lnL, Julia_total_lnLs1, bgb_lnL, total_loglikelihood=bgb_lnL)
 optim_result = build_optim_result(opt, optf, optx, ret)
 juliaRes_to_Rdata(inputs.res, trdf, inputs, lnLs_tuple, optim_result, geogfn, trfn; outwd=getwd(), outfns=NaN)
-resDECj_Yule_archive = deepcopy((inputs.res, inputs, lnLs_tuple, optim_result, geogfn, trfn));
+tmpres_archive = deepcopy((inputs.res, inputs, lnLs_tuple, optim_result, geogfn, trfn));
 """
 # Then run, in R:
 """
@@ -223,7 +223,7 @@ library(ape)
 library(cladoRcpp)
 library(diversitree)
 library(BioGeoBEARS)
-wd = "~/GitHub/PhyBEARS.jl/ex/cicadidae4/phybears_DECj_M0_mr3/"  # CHANGE THIS
+wd = "~/GitHub/PhyBEARS.jl/ex/siminf_v12a/"  # CHANGE THIS
 setwd(wd)
 sourceall("~/GitHub/PhyBEARS.jl/Rsrc/")
 res = PhyBEARS_res_to_BGB_res(outfns=NaN)
@@ -238,9 +238,9 @@ tipranges = getranges_from_LagrangePHYLIP(lgdata_fn=geogfn)
 max_range_size = res|inputs|max_range_size
 include_null_range = res|inputs|include_null_range
 
-pdffn = "phyBEARS_cicadidae4_DEC+J+Yule_M0_unconstrained_v1.pdf"  # CHANGE THIS
+pdffn = "phybears_M0_mr3_DEC+J+Yule_v2.pdf"  # CHANGE THIS
 pdf(pdffn, height=24, width=9)
-analysis_titletxt ="PhyBEARS DEC+J+Yule on Cicadidae M0_unconstrained"  # CHANGE THIS
+analysis_titletxt ="phybears_M0_mr3_DEC+J+Yule_v2"  # CHANGE THIS
 results_object = res
 scriptdir = np(system.file("extdata/a_scripts", package="BioGeoBEARS"))
 
